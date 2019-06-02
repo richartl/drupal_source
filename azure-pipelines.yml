@@ -1,7 +1,7 @@
 variables:
   registryName: rippertesting
   imageName: drupal_source1
-  imageVersion: ${build.buildId}
+  imageVersion: $(Build.BuildId)
   pass: $(dockerPassword)
 trigger:
   - QA
