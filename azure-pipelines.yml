@@ -1,0 +1,19 @@
+variables:
+  registryName: rippertesting
+  imageName: drupal_source1
+  imageVersion: ${Build.BuildId}
+  pass: $(dockerPassword)
+trigger:
+  - QA
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    echo Create image
+    echo $(dockerPassword)
+    echo $(Build.BuildId)
+    echo $(imageVersion)
+    docker build -t $(registryName).azurecr.io/$(imageName):$(imageVersion) .
+    docker login -u $(registryName) -p $(pass) $(registryName).azurecr.io
+    docker push $(registryName).azurecr.io/$(imageName):$(imageVersion)
