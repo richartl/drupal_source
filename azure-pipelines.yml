@@ -14,6 +14,6 @@ steps:
     echo $(dockerPassword)
     echo $(Build.BuildId)
     echo $(imageVersion)
-    docker build -t $(registryName).azurecr.io/$(imageName):$(imageVersion) .
     docker login -u $(registryName) -p $(pass) $(registryName).azurecr.io
+    docker build -t $(registryName).azurecr.io/$(imageName):$(imageVersion) .
     docker push $(registryName).azurecr.io/$(imageName):$(imageVersion)
